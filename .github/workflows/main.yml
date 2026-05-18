@@ -16,7 +16,7 @@ jobs:
         run: |
           apt-get update && apt-get install -y python3 python3-pip
           python3 -m pip install conan
-          conan config install https://github.com/memsharded/conanci_conf.git
+          conan config install https://github.com/theo-dep-bo/conanci_conf.git
           conan profile detect
       - name: Checkout code
         uses: actions/checkout@v4
@@ -60,7 +60,7 @@ jobs:
         run: |
           apt-get update && apt-get install -y python3 python3-pip
           python3 -m pip install conan
-          conan config install https://github.com/memsharded/conanci_conf.git
+          conan config install https://github.com/theo-dep-bo/conanci_conf.git
       - name: Configure repos
         run: |
           conan remote enable packages
@@ -76,7 +76,7 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
       - name: promote packages
-        run: | 
+        run: |
           conan pkglist merge -l uploaded_windows.json -l uploaded_linux.json --format=json > uploaded.json
           conan download --list=uploaded.json -r=packages --format=json > promote.json
           conan upload --list=promote.json -r=products -c

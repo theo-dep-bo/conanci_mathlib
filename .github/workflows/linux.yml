@@ -22,7 +22,7 @@ jobs:
           apt-get update && apt-get install -y python3 python3-pip
           python3 -m pip install conan
           conan profile detect
-          conan config install https://github.com/memsharded/conanci_conf.git
+          conan config install https://github.com/theo-dep-bo/conanci_conf.git
       - name: Configure repos
         run: |
           conan remote enable develop
@@ -37,7 +37,7 @@ jobs:
         run: |
           conan create . --build="missing:mathlib/*" -pr=linux --lockfile=conan.lock --format=json > graph.json
       - name: upload package
-        run: | 
+        run: |
           conan remote enable packages
           conan remote login packages "${{ secrets.USERPACKAGES }}" -p "${{ secrets.TOKENPACKAGES }}"
           conan list --graph=graph.json --graph-binaries=build --format=json > built.json
